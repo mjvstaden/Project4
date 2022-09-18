@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-private class HostnameHandler {
+public class HostnameHandler {
     private final List<Hostname> hostnames = Collections.synchronizedList(new ArrayList<>());
 
     /**
@@ -16,13 +17,29 @@ private class HostnameHandler {
     }
 
     /**
+     * Get an available hostname
+     * @return the hostname
+     */
+    public String getAvailableHostName() {
+        String hostname = "";
+        for (int i = 0; i < hostnames.size(); i++) {
+            if (hostnames.get(i).isAvailable() == false) {
+                hostname = hostnames.get(i).getHostname();
+                hostnames.get(i).setStatus(true);
+                break;
+            }
+        }
+        return hostname;
+    }
+
+    /**
      * This checks if the hostname is used
      * @param hostname The hostname
      * @return returns a boolean for if the hostname is used
      */
-    public boolean isUsed(int hostname) {
+    public boolean isUsed(String hostname) {
         for (int i = 0; i < hostnames.size(); i++) {
-            if (hostnames.get(i).getHostname() == hostname) {
+            if (hostnames.get(i).getHostname().equals(hostname)) {
                 return hostnames.get(i).isAvailable();
             }
         }
@@ -32,9 +49,9 @@ private class HostnameHandler {
      * Sets a hostname that is unavailable, available again
      * @param hostname The hostname that must be set available
      */
-    public void setAvailable(int hostname) {
+    public void setAvailable(String hostname) {
         for (int i = 0; i < hostnames.size(); i++) {
-            if (hostnames.get(i).getHostname() == hostname) {
+            if (hostnames.get(i).getHostname().equals(hostname)) {
                 hostnames.get(i).setStatus(false);
                 break;
             }

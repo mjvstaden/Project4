@@ -37,6 +37,7 @@ public class Server {
                 if (client.getClientSize() <= 1) {
                     client.populatePorts();
                     client.populateGroups();
+                    client.populateHostnames();
                 }
                 Thread thread = new Thread(client);
                 thread.start();

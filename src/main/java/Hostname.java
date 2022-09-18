@@ -1,4 +1,4 @@
-private class ClientHostname {
+public class Hostname {
 
     private String hostname;
     private boolean status;
@@ -26,7 +26,7 @@ private class ClientHostname {
 
     /**
      * Sets status to input parameter.
-     * @param available true if available.
+     * @param status true if available.
      */
     public void setStatus(boolean status) {
         this.status = status;

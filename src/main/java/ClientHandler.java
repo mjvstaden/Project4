@@ -10,10 +10,13 @@ public class ClientHandler implements Runnable {
     private static List<ClientHandler> clients = Collections.synchronizedList(new ArrayList<>());
     private static PortHandler portHandler = new PortHandler();
     private static GroupHandler groupHandler = new GroupHandler();
+    private static HostnameHandler hostnameHandler = new HostnameHandler();
     private Socket socket;
     private ObjectInputStream input;
     private ObjectOutputStream output;
     private Server server;
+
+    private String hostname;
 
     /**
      * Constructor for the Client Handler
@@ -26,11 +29,19 @@ public class ClientHandler implements Runnable {
             this.output = new ObjectOutputStream(socket.getOutputStream());
             this.server = server;
 
+            //getting a hostname
+            this.hostname = hostnameHandler.getAvailableHostName();
+            server.printLog(this.hostname + " joined the server");
+            output.writeObject(hostname);
+
             this.clients.add(this);
         } catch (IOException i) {
             System.out.println("MARK 1 CLIENTHANDLER");
+            server.printLog(this.hostname + " has left the server");
+            shutdown();
         } catch (NullPointerException n) {
-
+            server.printLog(this.hostname + " has left the server");
+            shutdown();
         }
     }
 
@@ -78,9 +89,17 @@ public class ClientHandler implements Runnable {
     }
 
     /**
+     * Function to call the populate function on Hostnames
+     */
+    public void populateHostnames() {
+        hostnameHandler.populateHostNames(50000);
+    }
+
+    /**
      * This closes all the inputs, outputs and sockets
      */
     private void shutdown() {
+        hostnameHandler.setAvailable(this.hostname);
         try {
             if (input != null) {
                 input.close();
