@@ -2,29 +2,37 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class ClientHandler implements Runnable {
-    private static List<ClientHandler> clients = new ArrayList<>();
+    private static List<ClientHandler> clients = Collections.synchronizedList(new ArrayList<>());
     private static PortHandler portHandler = new PortHandler();
+    private static GroupHandler groupHandler = new GroupHandler();
     private Socket socket;
     private ObjectInputStream input;
     private ObjectOutputStream output;
+    private Server server;
 
     /**
      * Constructor for the Client Handler
      * @param socket Socket for connection
      */
-    public ClientHandler(Socket socket) {
+    public ClientHandler(Socket socket, Server server) {
         try {
             this.socket = socket;
             this.input = new ObjectInputStream(socket.getInputStream());
             this.output = new ObjectOutputStream(socket.getOutputStream());
+            this.server = server;
 
             this.clients.add(this);
         } catch (IOException i) {
             System.out.println("MARK 1 CLIENTHANDLER");
+        } catch (NullPointerException n) {
+
         }
     }
 
@@ -54,10 +62,17 @@ public class ClientHandler implements Runnable {
     }
 
     /**
-     * Function to call the populate function on porthandler
+     * Function to call the populate function on Ports
      */
     public void populatePorts() {
         portHandler.populatePorts(50000);
+    }
+
+    /**
+     * Function to call the populate function on Groups
+     */
+    public void populateGroups() {
+        groupHandler.populateGroups(50000);
     }
 
     /**
