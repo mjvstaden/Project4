@@ -11,6 +11,7 @@ public class Server {
     private ServerSocket serverSocket;
     private int port = 1024;
     public static JFrame frame;
+    private static JTextArea textArea;
 
     /**
      * Constructor for the server
@@ -83,12 +84,17 @@ public class Server {
         lblServer.setBounds(130, 1, 191, 51);
         frame.getContentPane().add(lblServer);
 
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         textArea.setBounds(12, 64, 360, 550);
         frame.getContentPane().add(textArea);
 
         frame.setVisible(true);
     }
+
+    public void printLog(String msg) {
+        textArea.append(msg + "\n");
+    }
+
 
     /**
      * Main function for the server
