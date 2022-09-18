@@ -2,9 +2,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,7 +42,11 @@ public class ClientHandler implements Runnable {
         while (true) {
             try {
                 String code = (String) input.readObject();
+                if (code.startsWith("$[CODE:%25849565]$")) {
 
+                } else if (code.startsWith("$[CODE:%25849566]$")) {
+
+                }
             } catch (IOException i) {
                 System.out.println("MARK 2 CLIENTHANDLER");
             } catch (ClassNotFoundException e) {
