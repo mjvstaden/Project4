@@ -20,7 +20,6 @@ public class Client {
     private ObjectOutputStream output;
     private int serverport;
     private String ServerIp;
-    private ;
     /**
      * Constructor for the Client
      */
