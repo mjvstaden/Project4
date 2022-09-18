@@ -56,12 +56,6 @@ public class Server {
         }
     }
 
-<<<<<<< HEAD
-    /**
-     * Main function for the server
-     * @param args
-     */
-=======
     private static void intitializeGUI() {
 
         frame = new JFrame();
@@ -79,9 +73,13 @@ public class Server {
         frame.setVisible(true);
     }
 
->>>>>>> da1f0c09ccbac4d025668c8c2ec3c7079bb2afd5
+    /**
+     * Main function for the server
+     * @param args
+     */
     public static void main(String[] args) {
         Server server = new Server();
         server.start();
+        intitializeGUI();
     }
 }
