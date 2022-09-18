@@ -34,8 +34,7 @@ public class Client {
      * Main function that loops and sends information
      */
     private void start() {
-        output = new ObjectOutputStream(socket.getOutputStream());
-        input = new ObjectInputStream(socket.getInputStream());
+
     }
 
     /**
@@ -149,6 +148,8 @@ public class Client {
                 if (ip_check && port_check) {
                     try {
                         socket = new Socket(inetAddress.getHostName(), serverport);
+                        output = new ObjectOutputStream(socket.getOutputStream());
+                        input = new ObjectInputStream(socket.getInputStream());
                         frame.setVisible(false);
                         intializeGUI();
                         start();
