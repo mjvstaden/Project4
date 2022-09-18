@@ -7,6 +7,10 @@ public class VOIPListener {
     private static int port;
     private static boolean endCall;
 
+    /**
+     * VOIPListerner constructor.
+     * @param port portnumber
+     */
     public VOIPListener(int port) {
         this.port = port;
         endCall = false;

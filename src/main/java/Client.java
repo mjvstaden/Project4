@@ -20,6 +20,7 @@ public class Client {
     private ObjectOutputStream output;
     private int serverport;
     private String ServerIp;
+    private ClientHos
     /**
      * Constructor for the Client
      */
@@ -34,6 +35,9 @@ public class Client {
 
     }
 
+    /**
+     * Sets up the GUI for the Client
+     */
     public void intializeGUI() {
         frame = new JFrame();
         frame.setBounds(100, 100, 825, 485);
@@ -57,6 +61,10 @@ public class Client {
         JButton btnNewButton = new JButton("Make Call");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                output.writeObject("$[CODE:%25849565]$");
+                String hostname = JOptionPane.showInputDialog("Enter hostname: ");
+                output.writeObject(hostname);
+                output.flush();
             }
         });
         btnNewButton.setBounds(658, 70, 155, 46);
