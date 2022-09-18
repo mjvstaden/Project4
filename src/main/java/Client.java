@@ -20,6 +20,8 @@ public class Client {
     private ObjectOutputStream output;
     private int serverport;
     private String ServerIp;
+    private String hostname;
+
 
     /**
      * Constructor for the Client
@@ -32,7 +34,8 @@ public class Client {
      * Main function that loops and sends information
      */
     private void start() {
-
+        output = new ObjectOutputStream(socket.getOutputStream());
+        input = new ObjectInputStream(socket.getInputStream());
     }
 
     /**
