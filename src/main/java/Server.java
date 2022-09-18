@@ -30,6 +30,7 @@ public class Server {
     private void start() {
         while (true) {
             try {
+                System.out.println("Waiting for Client to connect");
                 Socket socket = serverSocket.accept();
                 ClientHandler client = new ClientHandler(socket);
                 if (client.getClientSize() <= 1) {
@@ -78,8 +79,8 @@ public class Server {
      * @param args
      */
     public static void main(String[] args) {
+        intitializeGUI();
         Server server = new Server();
         server.start();
-        intitializeGUI();
     }
 }

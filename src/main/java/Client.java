@@ -24,8 +24,7 @@ public class Client {
      * Constructor for the Client
      */
     public Client() {
-
-        //socket = new Socket(1024);
+        getUserInfo();
     }
 
     /**
@@ -35,7 +34,7 @@ public class Client {
 
     }
 
-    private static void intializeGUI() {
+    public void intializeGUI() {
         frame = new JFrame();
         frame.setBounds(100, 100, 825, 485);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -140,6 +139,8 @@ public class Client {
                     try {
                         socket = new Socket(inetAddress.getHostName(), serverport);
                         frame.setVisible(false);
+                        intializeGUI();
+                        start();
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, "IP Address or port may be invalid", "Couldn't Connect",
                                 JOptionPane.WARNING_MESSAGE);
@@ -159,6 +160,5 @@ public class Client {
     public static void main(String[] args) {
         Client client = new Client();
         client.start();
-        intializeGUI();
     }
 }
