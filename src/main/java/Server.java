@@ -58,21 +58,6 @@ public class Server {
         }
     }
 
-    public static void createClientHostnamess(int n) {
-        int count = 0;
-
-        for (int i = 0; i <= n; i++) {
-
-            if (count <= 256) {
-                String ip = "192.168." + count + "." + lastByte;
-                LocalIP localIP = new LocalIP(ip);
-                ipPool.add(localIP);
-                lastByte++;
-            } else
-                System.out.println("Too many local IP addresses");
-        }
-    }
-
     private static void intitializeGUI() {
 
         frame = new JFrame();
