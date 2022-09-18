@@ -2,10 +2,16 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Class for the server
+ */
 public class Server {
     private ServerSocket serverSocket;
     private int port = 1024;
 
+    /**
+     * Constructor for the server
+     */
     public Server() {
         try {
             serverSocket = new ServerSocket(this.port);
@@ -14,6 +20,10 @@ public class Server {
         }
     }
 
+    /**
+     * Function that starts the server and loops the whole time
+     * and accepting new clients
+     */
     private void start() {
         while (true) {
             try {
@@ -30,6 +40,9 @@ public class Server {
         }
     }
 
+    /**
+     * Shuts down the server
+     */
     private void shutdown() {
         try {
             if (!serverSocket.isClosed()) {
@@ -40,6 +53,10 @@ public class Server {
         }
     }
 
+    /**
+     * Main function for the server
+     * @param args
+     */
     public static void main(String[] args) {
         Server server = new Server();
         server.start();

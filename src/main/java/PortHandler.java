@@ -1,11 +1,22 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the port handler
+ */
 public class PortHandler {
     private final List<Port> ports = new ArrayList<>();
+
+    /**
+     * The constructor for the port handler
+     */
     public PortHandler() {
     }
 
+    /**
+     * This populates the list full of ports that can be used for communication
+     * @param amount The amount of port numbers that needs to be in the pool
+     */
     public void populatePorts(int amount) {
         for (int i = 0; i < amount; i++) {
             Port port = new Port(1025 + i);
@@ -13,6 +24,11 @@ public class PortHandler {
         }
     }
 
+    /**
+     * This checks if the port number is used
+     * @param port The port number
+     * @return returns a boolean for if the port number is used
+     */
     public boolean isUsed(int port) {
         for (int i = 0; i < ports.size(); i++) {
             if (ports.get(i).getPort() == port) {
@@ -22,6 +38,10 @@ public class PortHandler {
         return false;
     }
 
+    /**
+     * Get the next available port
+     * @return returns the port that is available
+     */
     public int getAvailablePort() {
         int port = -1;
         for (int i = 0; i < ports.size(); i++) {
@@ -34,6 +54,10 @@ public class PortHandler {
         return port;
     }
 
+    /**
+     * Sets a port that is unavailable, available again
+     * @param port The port that must be set available
+     */
     public void setAvailable(int port) {
         for (int i = 0; i < ports.size(); i++) {
             if (ports.get(i).getPort() == port) {

@@ -12,6 +12,10 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream input;
     private ObjectOutputStream output;
 
+    /**
+     * Constructor for the Client Handler
+     * @param socket Socket for connection
+     */
     public ClientHandler(Socket socket) {
         try {
             this.socket = socket;
@@ -24,6 +28,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Function that runs after the object is made
+     */
     @Override
     public void run() {
         while (true) {
@@ -38,15 +45,37 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Function to get the size of the clients list
+     * @return returns the amount of clients
+     */
     public int getClientSize() {
         return clients.size();
     }
 
+    /**
+     * Function to call the populate function on porthandler
+     */
     public void populatePorts() {
         portHandler.populatePorts(50000);
     }
 
+    /**
+     * This closes all the inputs, outputs and sockets
+     */
     private void shutdown() {
-
+        try {
+            if (input != null) {
+                input.close();
+            }
+            if (output != null) {
+                output.close();
+            }
+            if (socket.isConnected()) {
+                socket.close();
+            }
+        } catch (IOException i) {
+            System.out.println("MARK 4 CLIENTHANDLER");
+        }
     }
 }
