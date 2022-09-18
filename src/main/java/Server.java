@@ -32,9 +32,10 @@ public class Server {
             try {
                 System.out.println("Waiting for Client to connect");
                 Socket socket = serverSocket.accept();
-                ClientHandler client = new ClientHandler(socket);
+                ClientHandler client = new ClientHandler(socket, this);
                 if (client.getClientSize() <= 1) {
                     client.populatePorts();
+                    client.populateGroups();
                 }
                 Thread thread = new Thread(client);
                 thread.start();

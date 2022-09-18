@@ -1,11 +1,13 @@
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Class for the port handler
  */
 public class PortHandler {
-    private final List<Port> ports = new ArrayList<>();
+    private final List<Port> ports = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * The constructor for the port handler
@@ -24,19 +26,19 @@ public class PortHandler {
         }
     }
 
-    /**
-     * This checks if the port number is used
-     * @param port The port number
-     * @return returns a boolean for if the port number is used
-     */
-    public boolean isUsed(int port) {
-        for (int i = 0; i < ports.size(); i++) {
-            if (ports.get(i).getPort() == port) {
-                return ports.get(i).isUsed();
-            }
-        }
-        return false;
-    }
+//    /**
+//     * This checks if the port number is used
+//     * @param port The port number
+//     * @return returns a boolean for if the port number is used
+//     */
+//    public boolean isUsed(int port) {
+//        for (int i = 0; i < ports.size(); i++) {
+//            if (ports.get(i).getPort() == port) {
+//                return ports.get(i).isUsed();
+//            }
+//        }
+//        return false;
+//    }
 
     /**
      * Get the next available port
